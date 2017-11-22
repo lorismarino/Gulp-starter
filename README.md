@@ -12,6 +12,9 @@
   * Compile ES6
   * Auto indent
 
+### Other
+  * Minify images
+
 ## Who use:
 
 ```
@@ -21,7 +24,8 @@ cd Gulp-starter
 npm install
 ```
 
-when you code, run this:
+Code SCSS and JS in src folder, place your images in build/img folder.
+When you code, run this:
 
 ```
 gulp

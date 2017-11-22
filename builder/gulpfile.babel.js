@@ -22,25 +22,58 @@ const browserSync = bsCreate()
 // Import and create plugins loader
 
 import plugins from 'gulp-load-plugins'
-const $ = plugins()
+const $ = plugins();
 
 
 const config = {
-	src: '../src/',
-	dist: '../dist/'
+	src: '../src',
+	build: '../build',
+	dist: '../dist'
 }
 
 // Server and automatic page update
 
-gulp.task('server', ['styles', 'scripts'], () =>
+gulp.task('server', ['html', 'styles', 'scripts'], () =>
 {
 	browserSync.init(
 	{
-		server: config.src,
+		server: config.build,
 		//browser: "google chrome canary" /* Delete the comment if you have chrome canary */
 	})
-	gulp.watch(`${config.src}scss/**/*.scss`, ['styles'])
-	gulp.watch(`${config.src}*.html`).on('change', browserSync.reload)
+	gulp.watch(`${config.src}/scss/**/*.scss`, ['styles'])
+	gulp.watch(`${config.src}/*.html`, ['html'])
+})
+
+/**********
+ 
+ * HTML
+ 
+ *********/
+
+
+// Transform HTML
+
+gulp.task('html', () =>
+{
+	return gulp.src(`${config.src}/**/*.html`)
+		.pipe($.fileInclude(
+		{
+			prefix: '@@'
+		}))
+		.on("error", $.notify.onError(
+			{
+				title: 'Transform HTML : ',
+				message: '<%= error.message %>',
+				sound: 'beep'
+			}))
+		.pipe(gulp.dest(`${config.build}`))
+		.pipe(browserSync.stream())
+		.pipe($.notify(
+		{
+			title: 'Transform HTML: ',
+			message: 'success',
+			sound: 'beep'
+		}))
 })
 
 /**********
@@ -53,7 +86,7 @@ gulp.task('server', ['styles', 'scripts'], () =>
 
 gulp.task('styles', () =>
 {
-	return gulp.src(`${config.src}scss/styles.scss`)
+	return gulp.src(`${config.src}/scss/styles.scss`)
 		.pipe($.sourcemaps.init())
 		.pipe($.sass())
 		.on("error", $.notify.onError(
@@ -69,7 +102,7 @@ gulp.task('styles', () =>
 		}))
 
 		.pipe($.sourcemaps.write('./'))
-		.pipe(gulp.dest(`${config.src}css`))
+		.pipe(gulp.dest(`${config.build}/css`))
 		.pipe(browserSync.stream())
 		.pipe($.notify(
 		{
@@ -83,9 +116,9 @@ gulp.task('styles', () =>
 
 gulp.task('sassProper', () =>
 {
-	return gulp.src(`${config.src}scss/**/*.scss`)
+	return gulp.src(`${config.src}/scss/**/*.scss`)
 		.pipe($.csscomb())
-		.pipe(gulp.dest(`${config.src}scss`))
+		.pipe(gulp.dest(`${config.src}/scss`))
 })
 
 /**********
@@ -108,7 +141,7 @@ const bundle = () =>
 		.pipe(source('bundle.js'))
 		.pipe(buffer())
 
-		.pipe(gulp.dest(`${config.src}js`))
+		.pipe(gulp.dest(`${config.build}/js`))
 		.pipe(browserSync.stream())
 		.pipe($.notify(
 		{
@@ -123,9 +156,9 @@ gulp.task('scripts', function()
 	// Create bundler
 	bundler = browserify(
 		{
-			entries: `${config.src}js/app.js`,
+			entries: `${config.src}/js/app.js`,
 			debug: true,
-			paths: ['./node_modules', `${config.src}js`]
+			paths: ['./node_modules', `${config.src}/js`]
 		})
 		.transform('babelify',
 		{
@@ -146,9 +179,9 @@ gulp.task('scripts', function()
 
 gulp.task('jsProper', function()
 {
-	return gulp.src(`${config.src}js/**/*.js`)
+	return gulp.src(`${config.src}/js/**/*.js`)
 		.pipe($.jsbeautifier())
-		.pipe(gulp.dest(`${config.src}js`))
+		.pipe(gulp.dest(`${config.src}/js`))
 })
 
 /**********
@@ -161,7 +194,7 @@ gulp.task('jsProper', function()
 
 gulp.task('minCss', () =>
 {
-	return gulp.src(`${config.src}css/styles.css`)
+	return gulp.src(`${config.build}/css/styles.css`)
 		.pipe($.cssnano())
 		.on("error", $.notify.onError(
 		{
@@ -169,7 +202,7 @@ gulp.task('minCss', () =>
 			message: '<%= error.message %>',
 			sound: 'beep'
 		}))
-		.pipe(gulp.dest(`${config.dist}css`))
+		.pipe(gulp.dest(`${config.dist}/css`))
 		.pipe($.notify(
 		{
 			title: 'Minify CSS: ',
@@ -182,7 +215,7 @@ gulp.task('minCss', () =>
 
 gulp.task('minJs', () =>
 {
-	return gulp.src(`${config.src}js/bundle.js`)
+	return gulp.src(`${config.build}/js/bundle.js`)
 		.pipe($.uglify())
 		.on("error", $.notify.onError(
 		{
@@ -190,7 +223,7 @@ gulp.task('minJs', () =>
 			message: '<%= error.message %>',
 			sound: 'beep'
 		}))
-		.pipe(gulp.dest(`${config.dist}js`))
+		.pipe(gulp.dest(`${config.dist}/js`))
 		.pipe($.notify(
 		{
 			title: 'Minify JS: ',
@@ -203,7 +236,7 @@ gulp.task('minJs', () =>
 
 gulp.task('minImages', () =>
 {
-	return gulp.src(`${config.src}img/**/*.+(png|jpg|jpeg|gif|svg)`)
+	return gulp.src(`${config.build}/img/**/*.+(png|jpg|jpeg|gif|svg)`)
 		.pipe($.imagemin())
 		.on("error", $.notify.onError(
 		{
@@ -211,7 +244,7 @@ gulp.task('minImages', () =>
 			message: '<%= error.message %>',
 			sound: 'beep'
 		}))
-		.pipe(gulp.dest(`${config.dist}img`))
+		.pipe(gulp.dest(`${config.dist}/img`))
 		.pipe($.notify(
 		{
 			title: 'Minify images: ',
@@ -220,17 +253,11 @@ gulp.task('minImages', () =>
 		}))
 })
 
-/**********
- 
- * MOVE
- 
- *********/
-
 // Move pages
 
 gulp.task('movePages', () =>
 {
-	return gulp.src(`${config.src}*.html`)
+	return gulp.src(`${config.build}/*.html`)
 		.pipe(gulp.dest(`${config.dist}`))
 		.pipe($.notify(
 		{
