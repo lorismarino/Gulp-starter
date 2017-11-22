@@ -16,13 +16,13 @@ import
 {
 	create as bsCreate
 }
-from 'browser-sync';
-const browserSync = bsCreate();
+from 'browser-sync'
+const browserSync = bsCreate()
 
 // Import and create plugins loader
 
-import plugins from 'gulp-load-plugins';
-const $ = plugins();
+import plugins from 'gulp-load-plugins'
+const $ = plugins()
 
 
 const config = {
@@ -39,7 +39,7 @@ gulp.task('server', ['styles', 'scripts'], () =>
 		server: config.src,
 		//browser: "google chrome canary" /* Delete the comment if you have chrome canary */
 	})
-	gulp.watch(`${config.src}styles.scss`, ['styles'])
+	gulp.watch(`${config.src}scss/**/*.scss`, ['styles'])
 	gulp.watch(`${config.src}*.html`).on('change', browserSync.reload)
 })
 
@@ -77,7 +77,7 @@ gulp.task('styles', () =>
 			message: 'success',
 			sound: 'beep'
 		}))
-});
+})
 
 // Reorganization of SCSS
 
@@ -149,7 +149,7 @@ gulp.task('jsProper', function()
 	return gulp.src(`${config.src}js/**/*.js`)
 		.pipe($.jsbeautifier())
 		.pipe(gulp.dest(`${config.src}js`))
-});
+})
 
 /**********
  
@@ -176,7 +176,7 @@ gulp.task('minCss', () =>
 			message: 'success',
 			sound: 'beep'
 		}))
-});
+})
 
 // Minify JS
 
@@ -197,7 +197,7 @@ gulp.task('minJs', () =>
 			message: 'success',
 			sound: 'beep'
 		}))
-});
+})
 
 // Minify images
 
@@ -218,7 +218,7 @@ gulp.task('minImages', () =>
 			message: 'success',
 			sound: 'beep'
 		}))
-});
+})
 
 /**********
  
@@ -238,7 +238,7 @@ gulp.task('movePages', () =>
 			message: 'success',
 			sound: 'beep'
 		}))
-});
+})
 
 /**********
 
