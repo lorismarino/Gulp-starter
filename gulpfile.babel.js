@@ -15,32 +15,31 @@ import watchify from 'watchify'
 import
 {
 	create as bsCreate
-}
-from 'browser-sync'
+} from 'browser-sync'
 const browserSync = bsCreate()
 
 // Import and create plugins loader
 
 import plugins from 'gulp-load-plugins'
-const $ = plugins();
+const $ = plugins()
 
 
-const config = {
-	src: '../src',
-	build: '../build',
-	dist: '../dist'
+const config = 
+{
+	src: './src',
+	build: './build',
+	dist: './dist'
 }
 
 // Server and automatic page update
 
 gulp.task('server', ['html', 'styles', 'scripts'], () =>
 {
-	browserSync.init(
-	{
+	browserSync.init({
 		server: config.build,
 		//browser: "google chrome canary" /* Delete the comment if you have chrome canary */
 	})
-	gulp.watch(`${config.src}/scss/**/*.scss`, ['styles'])
+	gulp.watch(`${config.src}/**/*.scss`, ['styles'])
 	gulp.watch(`${config.src}/*.html`, ['html'])
 })
 
@@ -56,20 +55,17 @@ gulp.task('server', ['html', 'styles', 'scripts'], () =>
 gulp.task('html', () =>
 {
 	return gulp.src(`${config.src}/**/*.html`)
-		.pipe($.fileInclude(
-		{
+		.pipe($.fileInclude({
 			prefix: '@@'
 		}))
-		.on("error", $.notify.onError(
-			{
-				title: 'Transform HTML : ',
-				message: '<%= error.message %>',
-				sound: 'beep'
-			}))
+		.on('error', $.notify.onError({
+			title: 'Transform HTML : ',
+			message: '<%= error.message %>',
+			sound: 'beep'
+		}))
 		.pipe(gulp.dest(`${config.build}`))
 		.pipe(browserSync.stream())
-		.pipe($.notify(
-		{
+		.pipe($.notify({
 			title: 'Transform HTML: ',
 			message: 'success',
 			sound: 'beep'
@@ -89,23 +85,19 @@ gulp.task('styles', () =>
 	return gulp.src(`${config.src}/scss/styles.scss`)
 		.pipe($.sourcemaps.init())
 		.pipe($.sass())
-		.on("error", $.notify.onError(
-		{
+		.on('error', $.notify.onError({
 			title: 'Compile SASS : ',
 			message: '<%= error.message %>',
 			sound: 'beep'
 		}))
-		.pipe($.autoprefixer(
-		{
+		.pipe($.autoprefixer({
 			browsers: ['last 3 versions'],
 			cascade: false
 		}))
-
 		.pipe($.sourcemaps.write('./'))
 		.pipe(gulp.dest(`${config.build}/css`))
 		.pipe(browserSync.stream())
-		.pipe($.notify(
-		{
+		.pipe($.notify({
 			title: 'Compile SASS: ',
 			message: 'success',
 			sound: 'beep'
@@ -132,19 +124,16 @@ let bundler = null
 const bundle = () =>
 {
 	bundler.bundle()
-		.on("error", $.notify.onError(
-		{
+		.on('error', $.notify.onError({
 			title: 'Compile ES6: ',
 			message: '<%= error.message %>',
 			sound: 'beep'
 		}))
 		.pipe(source('bundle.js'))
 		.pipe(buffer())
-
 		.pipe(gulp.dest(`${config.build}/js`))
 		.pipe(browserSync.stream())
-		.pipe($.notify(
-		{
+		.pipe($.notify({
 			title: 'Compile ES6: ',
 			message: 'success',
 			sound: 'beep'
@@ -154,16 +143,11 @@ const bundle = () =>
 gulp.task('scripts', function()
 {
 	// Create bundler
-	bundler = browserify(
-		{
-			entries: `${config.src}/js/app.js`,
-			debug: true,
-			paths: ['./node_modules', `${config.src}/js`]
-		})
-		.transform('babelify',
-		{
-			presets: ['babel-preset-env'].map(require.resolve)
-		})
+	bundler = browserify({
+		entries: `${config.src}/js/app.js`,
+		debug: true,
+		paths: ['./node_modules', `${config.src}/js`]
+	}).transform(babelify)
 
 	// Watch
 	bundler.plugin(watchify)
@@ -173,15 +157,6 @@ gulp.task('scripts', function()
 
 	// Bundle
 	bundle()
-})
-
-// Reorganization of JS
-
-gulp.task('jsProper', function()
-{
-	return gulp.src(`${config.src}/js/**/*.js`)
-		.pipe($.jsbeautifier())
-		.pipe(gulp.dest(`${config.src}/js`))
 })
 
 /**********
@@ -196,15 +171,13 @@ gulp.task('minCss', () =>
 {
 	return gulp.src(`${config.build}/css/styles.css`)
 		.pipe($.cssnano())
-		.on("error", $.notify.onError(
-		{
+		.on('error', $.notify.onError({
 			title: 'Minfiy CSS: ',
 			message: '<%= error.message %>',
 			sound: 'beep'
 		}))
 		.pipe(gulp.dest(`${config.dist}/css`))
-		.pipe($.notify(
-		{
+		.pipe($.notify({
 			title: 'Minify CSS: ',
 			message: 'success',
 			sound: 'beep'
@@ -217,15 +190,13 @@ gulp.task('minJs', () =>
 {
 	return gulp.src(`${config.build}/js/bundle.js`)
 		.pipe($.uglify())
-		.on("error", $.notify.onError(
-		{
+		.on('error', $.notify.onError({
 			title: 'Minfiy JS: ',
 			message: '<%= error.message %>',
 			sound: 'beep'
 		}))
 		.pipe(gulp.dest(`${config.dist}/js`))
-		.pipe($.notify(
-		{
+		.pipe($.notify({
 			title: 'Minify JS: ',
 			message: 'success',
 			sound: 'beep'
@@ -238,15 +209,13 @@ gulp.task('minImages', () =>
 {
 	return gulp.src(`${config.build}/img/**/*.+(png|jpg|jpeg|gif|svg)`)
 		.pipe($.imagemin())
-		.on("error", $.notify.onError(
-		{
+		.on('error', $.notify.onError({
 			title: 'Minfiy images: ',
 			message: '<%= error.message %>',
 			sound: 'beep'
 		}))
 		.pipe(gulp.dest(`${config.dist}/img`))
-		.pipe($.notify(
-		{
+		.pipe($.notify({
 			title: 'Minify images: ',
 			message: 'success',
 			sound: 'beep'
@@ -259,8 +228,7 @@ gulp.task('movePages', () =>
 {
 	return gulp.src(`${config.build}/*.html`)
 		.pipe(gulp.dest(`${config.dist}`))
-		.pipe($.notify(
-		{
+		.pipe($.notify({
 			title: 'Move HTML: ',
 			message: 'success',
 			sound: 'beep'
@@ -274,5 +242,5 @@ RUN
 **********/
 
 gulp.task('default', ['server'])
-gulp.task('autoIndent', ['sassProper', 'jsProper']);
+gulp.task('autoIndent', ['sassProper'])
 gulp.task('prod', ['minCss', 'minJs', 'minImages', 'movePages'])
