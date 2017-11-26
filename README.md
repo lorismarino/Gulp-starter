@@ -6,13 +6,15 @@
 
 ### Styles
   * Compile sass
-  * Auto indent
+  * Minify css
 
 ### Scripts
   * Compile ES6
-  * Auto indent
+  * imports / exports
+  * Minify js
 
 ### Other
+  * Auto reload
   * Minify images
 
 ## Who use:
@@ -29,12 +31,6 @@ When you code, run this:
 
 ```
 gulp
-```
-
-if you are lost in your indentation, run this:
-
-```
-gulp autoIndent
 ```
 
 When you're done, minify everything:

@@ -104,15 +104,6 @@ gulp.task('styles', () =>
 		}))
 })
 
-// Reorganization of SCSS
-
-gulp.task('sassProper', () =>
-{
-	return gulp.src(`${config.src}/scss/**/*.scss`)
-		.pipe($.csscomb())
-		.pipe(gulp.dest(`${config.src}/scss`))
-})
-
 /**********
  
  * JS
@@ -242,5 +233,4 @@ RUN
 **********/
 
 gulp.task('default', ['server'])
-gulp.task('autoIndent', ['sassProper'])
 gulp.task('prod', ['minCss', 'minJs', 'minImages', 'movePages'])
