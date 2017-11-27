@@ -40,7 +40,7 @@ gulp.task('server', ['html', 'styles', 'scripts'], () =>
 		//browser: "google chrome canary" /* Delete the comment if you have chrome canary */
 	})
 	gulp.watch(`${config.src}/**/*.scss`, ['styles'])
-	gulp.watch(`${config.src}/*.html`, ['html'])
+	gulp.watch(`${config.src}/**/*.html`, ['html'])
 })
 
 /**********
