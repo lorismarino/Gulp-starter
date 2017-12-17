@@ -33,14 +33,14 @@ const config =
 
 // Server and automatic page update
 
-gulp.task('server', ['styles', 'scripts'], () =>
+gulp.task('server', ['html', 'styles', 'scripts'], () =>
 {
 	browserSync.init({
 		server: config.build,
 		browser: 'google chrome canary'
 	})
 	gulp.watch(`${config.src}/**/*.scss`, ['styles'])
-	gulp.watch(`${config.build}/**/*.php`).on('change', browserSync.reload)
+	gulp.watch(`${config.build}/**/*.html`).on('change', browserSync.reload)
 })
 
 /**********
