@@ -19,6 +19,8 @@
 
 ## Who use:
 
+*Require [Node](https://nodejs.org/en/) >= 6 & [Gulp](https://gulpjs.com/)*
+
 ```
 cd Gulp-starter
 ```

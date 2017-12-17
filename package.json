@@ -3,24 +3,23 @@
   "version": "1.0.0",
   "description": "A workflow to start your project with sass and es6.",
   "main": "gulpfile.babel.js",
-	"scripts":
-	{
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-	"repository":
-	{
+  "repository": {
     "type": "git",
     "url": "https://github.com/LorisMarino/Gulp-starter.git"
   },
   "author": "Loris MARINO <contact@loris-marino.fr>",
   "license": "MIT",
-	"devDependencies":
-	{
+  "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babelify": "^8.0.0",
     "browser-sync": "^2.18.13",
     "browserify": "^14.5.0",
+    "eslint": "^4.13.1",
+    "eslint-plugin-node": "^5.2.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^7.0.0",

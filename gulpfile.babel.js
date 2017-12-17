@@ -24,7 +24,7 @@ import plugins from 'gulp-load-plugins'
 const $ = plugins()
 
 
-const config = 
+const config =
 {
 	src: './src',
 	build: './build',
@@ -33,14 +33,14 @@ const config =
 
 // Server and automatic page update
 
-gulp.task('server', ['html', 'styles', 'scripts'], () =>
+gulp.task('server', ['styles', 'scripts'], () =>
 {
 	browserSync.init({
 		server: config.build,
-		//browser: "google chrome canary" /* Delete the comment if you have chrome canary */
+		browser: 'google chrome canary'
 	})
 	gulp.watch(`${config.src}/**/*.scss`, ['styles'])
-	gulp.watch(`${config.src}/**/*.html`, ['html'])
+	gulp.watch(`${config.build}/**/*.php`).on('change', browserSync.reload)
 })
 
 /**********
@@ -48,7 +48,6 @@ gulp.task('server', ['html', 'styles', 'scripts'], () =>
  * HTML
  
  *********/
-
 
 // Transform HTML
 
@@ -198,14 +197,14 @@ gulp.task('minJs', () =>
 
 gulp.task('minImages', () =>
 {
-	return gulp.src(`${config.build}/img/**/*.+(png|jpg|jpeg|gif|svg)`)
+	return gulp.src(`${config.build}/assets/img/**/*.+(png|jpg|jpeg|gif|svg)`)
 		.pipe($.imagemin())
 		.on('error', $.notify.onError({
 			title: 'Minfiy images: ',
 			message: '<%= error.message %>',
 			sound: 'beep'
 		}))
-		.pipe(gulp.dest(`${config.dist}/img`))
+		.pipe(gulp.dest(`${config.dist}/assets/img`))
 		.pipe($.notify({
 			title: 'Minify images: ',
 			message: 'success',
@@ -217,10 +216,23 @@ gulp.task('minImages', () =>
 
 gulp.task('movePages', () =>
 {
-	return gulp.src(`${config.build}/*.html`)
+	return gulp.src(`${config.build}/**/*.html`)
 		.pipe(gulp.dest(`${config.dist}`))
 		.pipe($.notify({
 			title: 'Move HTML: ',
+			message: 'success',
+			sound: 'beep'
+		}))
+})
+
+// Move assets
+
+gulp.task('moveAssets', () =>
+{
+	return gulp.src([`${config.build}/assets/**/*.*`, `!${config.build}/assets/img/**/*.+(png|jpg|jpeg|gif|svg)`])
+		.pipe(gulp.dest(`${config.dist}/assets`))
+		.pipe($.notify({
+			title: 'Move assets: ',
 			message: 'success',
 			sound: 'beep'
 		}))
@@ -233,4 +245,4 @@ RUN
 **********/
 
 gulp.task('default', ['server'])
-gulp.task('prod', ['minCss', 'minJs', 'minImages', 'movePages'])
+gulp.task('prod', ['minCss', 'minJs', 'minImages', 'movePages', 'moveAssets'])
