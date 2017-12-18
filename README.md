@@ -19,7 +19,11 @@
 
 ## Who use:
 
-*Require [Node](https://nodejs.org/en/) >= 6 & [Gulp](https://gulpjs.com/)*
+*Require [Node](https://nodejs.org/en/) >= 6*
+
+```
+npm install -g gulp@3.9.0
+```
 
 ```
 cd Gulp-starter

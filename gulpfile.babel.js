@@ -37,10 +37,10 @@ gulp.task('server', ['html', 'styles', 'scripts'], () =>
 {
 	browserSync.init({
 		server: config.build,
-		browser: 'google chrome canary'
+		// browser: 'google chrome canary' remove comment if you use canary
 	})
 	gulp.watch(`${config.src}/**/*.scss`, ['styles'])
-	gulp.watch(`${config.build}/**/*.html`).on('change', browserSync.reload)
+	gulp.watch(`${config.src}/**/*.html`, ['html'])
 })
 
 /**********
