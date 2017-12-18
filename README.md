@@ -32,7 +32,7 @@ cd Gulp-starter
 npm install
 ```
 
-Code SCSS and JS in src folder, place your images in build/img folder.
+Code SCSS and JS in src folder, place your assets in build/assets folder and img in build/assets.img.
 When you code, run this:
 
 ```
