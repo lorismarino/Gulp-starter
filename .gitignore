@@ -123,4 +123,5 @@ $RECYCLE.BIN/
 build/css/
 build/js/
 build/*.html
+dist/
 package-lock.json
