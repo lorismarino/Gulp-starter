@@ -24,6 +24,12 @@ const config =
   dist: './dist'
 }
 
+/**********
+
+ * DEV
+
+**********/
+
 // SERVER
 
 gulp.task('server', ['styles', 'scripts', 'moveAssets', 'movePages'], () => {
