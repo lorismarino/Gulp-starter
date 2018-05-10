@@ -1,1 +1,11 @@
-// Import your scss files
+@import 'sanitize.css';
+
+html,
+body {
+  display: flex;
+
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+}

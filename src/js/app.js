@@ -1,1 +1,1 @@
-// Import your es6 files
+// Code & import your JS
