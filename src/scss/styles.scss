@@ -1,10 +1,8 @@
-@import 'sanitize.css';
+@import 'sanitize';
+@import 'global';
 
-html,
-body {
+#content {
   display: flex;
-
-  height: 100%;
 
   align-items: center;
   justify-content: center;
