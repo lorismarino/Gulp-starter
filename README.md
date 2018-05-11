@@ -63,3 +63,5 @@ gulp prod
 ```
 
 and your ready-to-go site is in the dist folder.
+
+*For more information, [view Gulp PHP router](https://github.com/LorisMarino/Gulp-PHP-router)*
