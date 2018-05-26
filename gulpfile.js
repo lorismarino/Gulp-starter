@@ -20,8 +20,8 @@ const plugins = require('gulp-load-plugins')()
 
 const config =
 {
-  src: './src',
-  dist: './dist'
+  src: 'src',
+  dist: 'dist'
 }
 
 /**********
