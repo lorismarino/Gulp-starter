@@ -6,13 +6,11 @@
 
 ## Features:
 
-
 ### Styles
 
 * Compile sass
 
 * Minify css
-
 
 ### Scripts
 
@@ -22,45 +20,31 @@
 
 * Minify js
 
-
 ### Other
 
-* Auto reload
+* Live & hot reload
 
 * Minify images
-
 
 ## Who use:
 
 *Require [Node](https://nodejs.org/en/) >= 6*
 
-```
+    npm install -g gulp@3.9.0
 
-cd Gulp-starter
+    cd Gulp-starter
 
-```
+    npm install
 
-```
-
-npm install
-
-```
+***Work in src folder***
 
 When you code, run this:
 
-```
-
-gulp
-
-```
+    gulp
 
 When you're done, minify everything:
 
-```
-
-gulp prod
-
-```
+    gulp prod
 
 and your ready-to-go site is in the dist folder.
 

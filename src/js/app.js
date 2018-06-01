@@ -1,1 +1,3 @@
-// Code & import your JS
+import SayHello from './components/SayHello'
+
+new SayHello('John')
