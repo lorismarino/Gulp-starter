@@ -1,0 +1,46 @@
+html,
+body {
+  height: 100%;
+}
+
+.page {
+  display: grid;
+  overflow: auto;
+
+  height: 100%;
+
+  grid-template-areas: 'header'
+  'main'
+  'footer';
+  grid-template-rows: auto 1fr auto;
+
+  .header {
+    grid-area: header;
+  }
+
+  .main {
+    grid-area: main;
+  }
+
+  .footer {
+    grid-area: footer;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 $container-padding;
+
+  @media screen and (min-width: $sm) {
+    width: 54rem;
+  }
+  @media screen and (min-width: $md) {
+    width: 72rem;
+  }
+  @media screen and (min-width: $lg) {
+    width: 96rem;
+  }
+  @media screen and (min-width: $xl) {
+    width: 114rem;
+  }
+}

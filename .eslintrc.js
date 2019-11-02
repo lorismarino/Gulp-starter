@@ -1,14 +1,14 @@
 module.exports = {
-	'env': {
-		'browser': true,
-    'es6': true
+  parserOptions: {
+    parser: 'babel-eslint'
   },
-	'extends': 'standard',
-  'parserOptions': {
-    'parser': 'babel-eslint',
-    'sourceType': 'module'
-  },
-  'rules': {
-    'no-new': 0
+  extends: [
+    'standard'
+  ],
+  plugins: [
+    'prettier'
+  ],
+  rules: {
+    "no-new": 0
   }
 }
