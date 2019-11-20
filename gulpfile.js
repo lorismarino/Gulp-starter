@@ -26,7 +26,7 @@ const message = {
  * Development
  */
 
- // Server
+// Server
 
 const server = () => {
   browserSync.init({
@@ -50,8 +50,9 @@ const server = () => {
 
 // Compile scss and add autoprefixer
 const styles = () => {
-  return gulp.src(`${folders.src}assets/scss/main.scss`, {sourcemaps: true})
+  return gulp.src(`${folders.src}assets/scss/main.scss`)
     .pipe(plugins.plumber())
+    .pipe(plugins.sourcemaps.init())
     .pipe(plugins.sass()
       .on("error", plugins.notify.onError({
         message: message.error,
@@ -59,6 +60,7 @@ const styles = () => {
       }))
     )
     .pipe(plugins.autoprefixer())
+    .pipe(plugins.sourcemaps.write())
     .pipe(gulp.dest(`${folders.dist}assets/css`))
     .pipe(plugins.notify({
       message: message.compiled,
