@@ -43,9 +43,7 @@ const server = () => {
   gulp.watch(`${folders.src}pages/**/*.+(html|php)`, pages)
 
   gulp.watch(`${folders.dist}assets/img/sprite.svg`).on('change', browserSync.reload)
-  gulp.watch(`${folders.dist}assets/js/main.js`).on('change', browserSync.reload)
   gulp.watch(`${folders.dist}assets/img/**/*.+(png|jpg|jpeg|gif|svg)`).on('change', browserSync.reload)
-  gulp.watch(`${folders.dist}**/*.+(html|php)`).on('change', browserSync.reload)
 }
 
 // Compile scss and add autoprefixer
@@ -100,7 +98,7 @@ const scripts = () => {
       message: message.transpiled,
       title: "Transpilation js"
     }))
-  browserSync.reload();
+    .pipe(browserSync.stream())
 }
 
 // Create sprite
@@ -155,6 +153,7 @@ const pages = () => {
       message: message.exported,
       title: "Export pages"
     }))
+    .pipe(browserSync.stream())
 }
 
 
