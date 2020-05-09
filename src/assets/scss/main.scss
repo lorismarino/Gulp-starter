@@ -1,15 +1,19 @@
 // base
 @import '01-base/colors';
+@import '01-base/functions';
 @import '01-base/variables';
 @import '01-base/typography';
 @import '01-base/reset';
 @import '01-base/mixins';
 @import '01-base/utilities';
 
-// layout
+// bootstrap
+@import '../../../node_modules/bootstrap/scss/bootstrap-reboot';
+@import '../../../node_modules/bootstrap/scss/grid';
+
+// layouts
 @import '02-layout/layout';
 @import '02-layout/header';
 @import '02-layout/footer';
 
-// module
-@import '03-module/buttons';
+// modules

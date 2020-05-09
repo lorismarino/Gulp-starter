@@ -1,0 +1,15 @@
+html,
+body {
+  height: 100%;
+  overflow: auto;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__content {
+    flex: 1;
+  }
+}

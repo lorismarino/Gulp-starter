@@ -1,6 +1,6 @@
 {
   "name": "gulp-starter",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A starter pack for your modern projects.",
   "author": "Loris Marino <loris.mro@gmail.com> (https://lorismarino.fr)",
   "license": "MIT",
@@ -43,7 +43,6 @@
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
-    "gsap": "^3.0.1",
-    "validator": "^12.1.0"
+    "jquery": "^3.5.1"
   }
 }
