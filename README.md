@@ -18,7 +18,7 @@
 
 ***Run for development:***
 
-    gulp
+    npm run dev / yarn dev
 
 *Access your browser with the "Local" address provided at launch by Browsersync.*
 
@@ -26,4 +26,4 @@
 
 ***Run for production :***
 
-    gulp build
+    npm run build / yarn build

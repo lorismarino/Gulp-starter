@@ -7,6 +7,10 @@
   "browserslist": [
     "defaults"
   ],
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp build"
+  },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.5.5",
