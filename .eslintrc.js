@@ -3,10 +3,8 @@ module.exports = {
     parser: 'babel-eslint'
   },
   extends: [
-    'standard'
-  ],
-  plugins: [
-    'prettier'
+    'standard',
+    "plugin:prettier/recommended"
   ],
   rules: {
     "no-new": 0

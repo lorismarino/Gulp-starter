@@ -1,5 +1,5 @@
 class SayHello {
-  constructor (name = 'John Doe') {
+  constructor(name = 'John Doe') {
     console.log(`Hello ${name}`)
   }
 }
