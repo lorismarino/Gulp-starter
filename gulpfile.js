@@ -13,12 +13,11 @@ const folders = {
 
 // Messages
 const message = {
-  compiled: "<%= file.relative %> a été compilé.",
-  compiledMinified: "<%= file.relative %> a été compilé et minifié.",
-  exported: "<%= file.relative %> a été exporté",
-  transpiled: "<%= file.relative %> a été transpilé",
-  minified: "<%= file.relative %> a été minifié",
-  clean: "<%= file.relative %>: a été supprimé",
+  compiled: "<%= file.relative %> has been compiled.",
+  compiledMinified: "<%= file.relative %> has been compiled and minified.",
+  exported: "<%= file.relative %> has been exported.",
+  exportedMinified: "<%= file.relative %> has been exported and minified.",
+  clean: "<%= file.relative %> has been deleted.",
   error: "<%= error.message %>"
 }
 
@@ -41,6 +40,8 @@ const server = () => {
   gulp.watch(`${folders.src}assets/sprite/**/*.svg`, sprite)
   gulp.watch(`${folders.src}assets/img/**/*.+(png|jpg|jpeg|gif|svg)`, images)
   gulp.watch(`${folders.src}pages/**/*.+(html|php)`, pages)
+  gulp.watch(`${folders.src}layouts/**/*.+(html|php)`, pages)
+  gulp.watch(`${folders.src}assets/fonts/**/*.+(ttf|otf|woff|woff2|eot)`, fonts)
 
   gulp.watch(`${folders.dist}assets/img/sprite.svg`).on('change', browserSync.reload)
   gulp.watch(`${folders.dist}assets/img/**/*.+(png|jpg|jpeg|gif|svg)`).on('change', browserSync.reload)
@@ -54,7 +55,7 @@ const styles = () => {
     .pipe(plugins.sass()
       .on("error", plugins.notify.onError({
         message: message.error,
-        title: "Erreur de compilation scss"
+        title: "Scss error"
       }))
     )
     .pipe(plugins.autoprefixer())
@@ -62,7 +63,7 @@ const styles = () => {
     .pipe(gulp.dest(`${folders.dist}assets/css`))
     .pipe(plugins.notify({
       message: message.compiled,
-      title: "Compilation scss"
+      title: "Scss"
     }))
     .pipe(browserSync.stream())
 }
@@ -95,8 +96,8 @@ const scripts = () => {
     }))
     .pipe(gulp.dest(`${folders.dist}assets/js`))
     .pipe(plugins.notify({
-      message: message.transpiled,
-      title: "Transpilation js"
+      message: message.compiled,
+      title: "Js"
     }))
     .pipe(browserSync.stream())
 }
@@ -119,6 +120,10 @@ const sprite = () => {
       }
     }))
     .pipe(gulp.dest(`${folders.dist}assets/img`))
+    .pipe(plugins.notify({
+      message: message.compiled,
+      title: "Sprite"
+    }))
 }
 
 // Move images
@@ -128,7 +133,7 @@ const images = () => {
     .pipe(gulp.dest(`${folders.dist}assets/img`))
     .pipe(plugins.notify({
       message: message.exported,
-      title: "Export images"
+      title: "Images"
     }))
 }
 
@@ -139,7 +144,7 @@ const fonts = () => {
     .pipe(gulp.dest(`${folders.dist}assets/fonts`))
     .pipe(plugins.notify({
       message: message.exported,
-      title: "Export fonts"
+      title: "Fonts"
     }))
 }
 
@@ -151,7 +156,7 @@ const pages = () => {
     .pipe(gulp.dest(`${folders.dist}`))
     .pipe(plugins.notify({
       message: message.exported,
-      title: "Export pages"
+      title: "Pages"
     }))
     .pipe(browserSync.stream())
 }
@@ -172,7 +177,7 @@ const minStyles = () => {
     .pipe(plugins.sass()
       .on("error", plugins.notify.onError({
         message: message.error,
-        title: "Erreur de compilation scss"
+        title: "Scss error"
       }))
     )
     .pipe(plugins.autoprefixer())
@@ -180,7 +185,7 @@ const minStyles = () => {
     .pipe(gulp.dest(`${folders.dist}assets/css`))
     .pipe(plugins.notify({
       message: message.compiledMinified,
-      title: "Minification css"
+      title: "Css"
     }))
 }
 
@@ -210,8 +215,8 @@ const minScripts = () => {
     }))
     .pipe(gulp.dest(`${folders.dist}assets/js`))
     .pipe(plugins.notify({
-      message: message.exported,
-      title: "Export images"
+      message: message.compiledMinified,
+      title: "Js"
     }))
 }
 
@@ -220,6 +225,10 @@ const minImages = () => {
   return gulp.src(`${folders.src}assets/img/**/*`)
     .pipe(plugins.imagemin({ verbose: true }))
     .pipe(gulp.dest(`${folders.dist}assets/img`))
+    .pipe(plugins.notify({
+      message: message.exportedMinified,
+      title: "Images"
+    }))
 }
 
 exports.default = gulp.series(gulp.parallel(styles, scripts, sprite, images, fonts, pages), server)
