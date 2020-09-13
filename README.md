@@ -1,12 +1,13 @@
-# Gulp starter
+# Gulp starter (v2.0.0)
 
 ## Features:
 
  - **development**
-	 - live reload / hot reload
+	 - hot reload
 	 - auto compile
-	 - scss
+	 - scss compile
 	 - es6 modules
+   - es6 compile
 	 - templating
 	 - css minification
 	 - js minification
