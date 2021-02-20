@@ -11,11 +11,11 @@
 
 <body>
   <div class="page {{ page }}">
-    {% include 'header.html' %}
+    {% include '../partials/header.html' %}
     <main class="page__content">
       {% block page %}{% endblock %}
     </main>
-    {% include 'footer.html' %}
+    {% include '../partials/footer.html' %}
   </div>
   <script src="assets/js/main.js"></script>
 </body>

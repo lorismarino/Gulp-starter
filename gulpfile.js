@@ -40,6 +40,7 @@ const server = () => {
   gulp.watch(`${folders.src}assets/img/**/*.+(png|jpg|jpeg|gif|svg)`, images)
   gulp.watch(`${folders.src}pages/**/*.+(html|php)`, pages)
   gulp.watch(`${folders.src}layouts/**/*.+(html|php)`, pages)
+  gulp.watch(`${folders.src}partials/**/*.+(html|php)`, pages)
   gulp.watch(`${folders.src}assets/fonts/**/*.+(ttf|otf|woff|woff2|eot)`, fonts)
 
   gulp
@@ -56,6 +57,11 @@ const styles = () => {
     .src(`${folders.src}assets/scss/main.scss`)
     .pipe(plugins.plumber())
     .pipe(plugins.sourcemaps.init())
+    .pipe(
+      plugins.stylelint({
+        reporters: [{ formatter: 'string', console: true }]
+      })
+    )
     .pipe(
       plugins.sass().on(
         'error',
@@ -175,7 +181,7 @@ const fonts = () => {
 // Move pages
 const pages = () => {
   return gulp
-    .src([`${folders.src}pages/*.html`, `${folders.src}pages/*.php`])
+    .src([`${folders.src}pages/**/*.html`, `${folders.src}pages/**/*.php`])
     .pipe(plugins.plumber())
     .pipe(plugins.twig({ extname: true }))
     .pipe(gulp.dest(`${folders.dist}`))
@@ -201,6 +207,11 @@ const clean = () => {
 const minStyles = () => {
   return gulp
     .src(`${folders.src}assets/scss/**/*.scss`)
+    .pipe(
+      plugins.stylelint({
+        reporters: [{ formatter: 'string', console: true }]
+      })
+    )
     .pipe(
       plugins.sass().on(
         'error',
