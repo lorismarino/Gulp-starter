@@ -1,1 +1,22 @@
+/**
+  * reset
+*/
 
+* {
+  background-color: transparent;
+  border: 0;
+  box-sizing: border-box;
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+button {
+  cursor: pointer;
+}

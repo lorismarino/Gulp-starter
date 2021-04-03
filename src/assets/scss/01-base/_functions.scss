@@ -1,5 +1,9 @@
+/**
+  * functions
+*/
+
 // convert px to rem (base 16px)
 @function rem($size) {
-  $remSize: $size / 16;
-  @return #{$remSize}rem;
+  $rem-size: $size / 16;
+  @return #{$rem-size}rem;
 }

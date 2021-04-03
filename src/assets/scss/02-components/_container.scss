@@ -1,0 +1,24 @@
+.container {
+  padding: 0 rem(40);
+  width: 100%;
+
+  &--noPadding {
+    padding: 0;
+  }
+
+  &--center {
+    margin: 0 auto;
+
+    @include tablet {
+      max-width: $tablet-width;
+    }
+
+    @include laptop {
+      max-width: $laptop-width;
+    }
+
+    @include desktop {
+      max-width: $desktop-width;
+    }
+  }
+}

@@ -10,9 +10,14 @@
 // bootstrap
 // @import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 
-// layouts
-@import '02-layout/layout';
-@import '02-layout/header';
-@import '02-layout/footer';
+// components
+@import '02-components/container';
 
 // modules
+
+// layouts
+@import '04-layout/layout';
+@import '04-layout/header';
+@import '04-layout/footer';
+
+// pages
