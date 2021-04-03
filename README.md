@@ -1,13 +1,8 @@
-
-# Gulp starter (v2.0.0)
-
-
+# Gulp starter (v2.1.0)
 
 ## Features:
 
-
-
--  **development**
+- **development**
 
 - hot reload
 
@@ -27,34 +22,20 @@
 
 - images minification
 
- ***install eslint and stylelint extensions and configure your editor to format when saving***
+  **_install eslint and stylelint extensions and configure your editor to format when saving_**
 
-
-***Install the dependencies:***
-
-
+**_Install the dependencies:_**
 
 npm i / yarn install
 
-
-***Run for development:***
-
-
+**_Run for development:_**
 
 npm run dev / yarn dev
 
+_Access your browser with the "Local" address provided at launch by Browsersync._
 
+_Access with your smartphone or other device connected to the network, use the "External" address provided at launch by Browsersync._
 
-*Access your browser with the "Local" address provided at launch by Browsersync.*
-
-
-
-*Access with your smartphone or other device connected to the network, use the "External" address provided at launch by Browsersync.*
-
-
-
-***Run for production :***
-
-
+**_Run for production :_**
 
 npm run build / yarn build
