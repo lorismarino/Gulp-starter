@@ -1,15 +1,18 @@
 html,
 body {
   height: 100%;
-  -webkit-overflow-scrolling: touch;
 }
 
 .page {
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
 
   &__content {
-    flex: 1;
+    flex-grow: 1;
   }
 }
+
+
+
