@@ -1,12 +1,15 @@
 module.exports = {
+  root: true,
   parserOptions: {
+    sourceType: 'module',
     parser: 'babel-eslint'
   },
-  extends: [
-    'standard',
-    "plugin:prettier/recommended"
-  ],
+  env: {
+    browser: true,
+    es6: true
+  },
+  extends: ['standard', 'plugin:prettier/recommended'],
   rules: {
-    "no-new": 0
+    'no-new': 0
   }
 }
